@@ -1,0 +1,24 @@
+*,*::before,*::after{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
+html{
+    font-size: 62.5%;
+}
+body{
+    font-size: 1.4rem;
+    font-family:'Microsoft YaHei','Hiragino Sans GB',Helvetica,Arial,'Lucida Grande',sans-serif;
+}
+
+ul,li{
+    list-style: none;
+}
+a:hover{
+    text-decoration: none;
+}

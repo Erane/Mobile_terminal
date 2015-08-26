@@ -1,0 +1,370 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html" charset="utf-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name = "viewport" content = "width = device-width">
+    <meta name = "viewport" content = "initial-scale = 1.0">
+    <meta name = "viewport" content = "height = device-height">
+    <meta name = "viewport" content = "maximum-scale=1.0">
+    <meta name = "viewport" content = "user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link type="text/css" rel="stylesheet" href="fonts/demo.css">
+    <link type="text/css" rel="stylesheet" href="fonts/iconfont.css">
+    <link type="text/css" rel="stylesheet" href="css/normalize.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+    <style>
+        body{
+            overflow-x: hidden;
+        }
+        .page1{
+            position: relative;
+            width: 100%;
+            z-index: 1;
+        }
+        .top{
+            width: 100%;
+            height: 100px;
+            background: rgb(142,212,152);
+            text-align: center;
+            line-height: 100px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 88;
+        }
+        .top > h1{
+            color: white;
+            font-weight: normal;
+            font-size: 3rem;
+        }
+        .top>a{
+            display: block;
+            width: 100px;
+            height: 100%;
+            text-align: center;
+            /*background: red;*/
+        }
+        .top>a>i::before{
+            color: white;
+            font-size: 4.6rem;
+        }
+        .top>a:nth-child(1){
+            float: left;
+        }
+        .top>a:nth-child(2){
+            float: right;
+        }
+        .nav{
+            width: 100%;
+            position: relative;
+            top: 0;
+            left: 0;
+        }
+        .nav>ul{
+            position: absolute;
+            top:0;
+            left: 0;
+            width: 100%;
+            background: rgb(142,212,152);
+            opacity: .9;
+            border-top: 1px solid white;
+            display: none;
+        }
+        .nav>ul>li{
+            float: left;
+        }
+        .nav>ul>li:nth-child(1){
+            margin-left: 25px;
+        }
+        .nav>ul>li>a{
+            display: block;
+            color: white;
+            font-size: 3rem;
+            margin-right: 18px;
+        }
+        .active{
+            font-weight: bold;
+        }
+        main{
+            width: 100%;
+            position: absolute;
+            top: 100px;
+            left: 0;
+            z-index: 5;
+        }
+        #list{
+            width: 100%;
+            margin-left: 25px;
+        }
+        .list_con{
+            width: 100%;
+            position: relative;
+            left: 0;
+            top: 0;
+            border-bottom: 1px dashed #8e8e8e;
+        }
+        .box{
+            width: 100%;
+            height:120px ;
+            position: relative;
+            left: 0;
+            top: 0;
+        }
+        .box>i:before{
+            font-size: 8rem;
+            margin: 0 50px 0 10px;
+        }
+        .box .kind{
+            font-size: 4rem;
+            font-style: normal;
+            font-weight: normal;
+            color: rgb(100,100,100);
+            margin-right: 150px;
+        }
+        .box>.money{
+            color: rgb(218,106,97);
+            font-size: 4rem;
+        }
+        .box>.change_color{
+            color: rgb(142,212,152);
+        }
+        .box>i:before,.box .kind,.box .money{
+            float: left;
+            line-height: 120px;
+        }
+        .box>.the_time{
+            float: right;
+            font-size: 1.6rem;
+            margin-right: 50px;
+            margin-top: 10px;
+            color: #b6b6b6;
+        }
+        .list_con .change{
+            position: absolute;
+            width: 200px;
+            top: 0;
+            left: 100%;
+            background: rgb(215,76,61);
+        }
+        .change>a{
+
+            display: block;
+            float: left;
+            height: 120px;
+            width: 100px;
+            text-align: center;
+            border-bottom: 1px dashed #8e8e8e;
+        }
+        .change>a>i{
+            color: white;
+            font-size: 8rem;
+        }
+    </style>
+    <script src="jq/jquery-2.1.4.min.js"></script>
+    <script src="js/myjs.js"></script>
+    <script>
+//        function addEvent(obj,type,fn){
+//            if(document.addEventListener){
+//                obj.addEventListener(type,fn,false)
+//            }
+//        }
+//        function removeEvent(obj,type,fn){
+//            if(document.removeEventListener){
+//                obj.removeEventListener(type,fn,false)
+//            }
+//        }
+//        window.onload=function(){
+//            var box=document.getElementsByClassName("box");
+//            var nav=document.getElementsByClassName("nav")[0].getElementsByTagName("ul")[0];
+//            var open_nav=document.getElementsByClassName("top")[0].getElementsByTagName("a")[0];
+//            var show_nav={
+//                touchStart:function(e){
+//                    e.preventDefault();
+//                    $(nav).slideToggle(500)
+//                }
+//            };
+//            addEvent(open_nav,"touchstart",show_nav.touchStart)
+//            var Start,Move,above=0;
+//            var event={
+//                touchStart:function(e){
+//                    e.preventDefault();
+//                    var touch= e.changedTouches[0];
+//                    Start={
+//                        x:touch.pageX||touch.clientX
+//                    };
+//                    addEvent(this,"touchmove",event.touchMove)
+//                },
+//                touchMove:function(e){
+//                    e.preventDefault();
+//                    var touch= e.changedTouches[0];
+//                    Move={
+//                        x:touch.pageX||touch.clientX
+//                    };
+//                    this.style.left=(Move.x-Start.x)+above+"px";
+//                    addEvent(this,"touchend",event.touchEnd)
+//                },
+//                touchEnd:function(){
+//                    above=parseInt(this.offsetLeft);
+//                    if(above>0){
+//                        $(this).animate({left:0},200)
+//                        above=0
+//                    }
+//                    if(above<0&&above<-222){
+//                        $(this).animate({left:- 222 +"px"},200);
+//                        above=-222
+//                    }
+//                    removeEvent(this,"touchmove",event.touchMove)
+//                    removeEvent(this,"touchend",event.touchEnd)
+//                }
+//            };
+//            for(var i=0;i<box.length;i++){
+//                addEvent(box[i],"touchstart",event.touchStart)
+//            }
+//        }
+    </script>
+</head>
+<body>
+<div class="page1">
+    <header class="top">
+        <a href="#">
+            <i class="iconfont  icon-07daohang"></i>
+        </a>
+        <a href="#">
+            <i class="iconfont  icon-bi"></i>
+        </a>
+        <h1>记账本</h1>
+        <nav class="nav">
+            <ul>
+                <li><a href="#" class="active">账目列表</a></li>
+                <li><a href="#">账目统计</a></li>
+                <li><a href="#">账目图表</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div id="list">
+            <section class="list_con">
+                <div class="box">
+                    <i class="iconfont icon-icon01"></i>
+                    <p class="kind">衣服</p>
+                    <span class="money">- 836.50</span>
+                    <span class="the_time">15/7/21</span>
+                    <div class="change">
+                        <a href="#">
+                            <i class="iconfont icon-bi"></i>
+                        </a>
+                        <a href="#">
+                            <i class="iconfont icon-lajitong"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <section class="list_con">
+                <div class="box">
+                    <i class="iconfont icon-feiji"></i>
+                    <p class="kind">交通</p>
+                    <span class="money change_color">+5211</span>
+                    <span class="the_time">15/7/21</span>
+                    <div class="change">
+                        <a href="#">
+                            <i class="iconfont icon-bi"></i>
+                        </a>
+                        <a href="#">
+                            <i class="iconfont icon-lajitong"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+</div>
+<div class="page2">
+    <header class="edit">
+        <a href="#">
+            <i class="iconfont icon-cha"></i>
+        </a>
+        <a href="#" class="add_new_info">发布</a>
+        <h2>记一笔</h2>
+    </header>
+    <main class="chose_icon">
+        <section class="icon_box">
+            <a href="#" class="chose_this">
+                <i class="iconfont icon-qian"></i>
+                <p>收入</p>
+            </a>
+        </section>
+        <section class="icon_box">
+            <a href="#" class="chose_this">
+                <i class="iconfont icon-icon01"></i>
+                <p>衣服</p>
+            </a>
+            <a href="#" class="chose_this">
+                <i class="iconfont icon-navyinshi"></i>
+                <p>饮食</p>
+            </a>
+            <a href="#" class="chose_this">
+                <i class="iconfont icon-chonghuafei"></i>
+                <p>话费</p>
+            </a>
+            <a href="#" class="chose_this">
+                <i class="iconfont icon-feiji"></i>
+                <p>交通</p>
+            </a>
+        </section>
+        <section class="icon_box">
+            <a href="#" class="chose_this">
+                <i class="iconfont icon-gouwu"></i>
+                <p>购物</p>
+            </a>
+            <a href="#" class="chose_this">
+                <i class="iconfont icon-taozhangshezhi"></i>
+                <p>其他</p>
+            </a>
+        </section>
+    </main>
+    <!--<div id="counter">-->
+        <!--<div class="show_icon">-->
+            <!--<a class="counter_icon">-->
+                <!--<i class="iconfont icon-feiji"></i>-->
+                <!--<p>交通</p>-->
+            <!--</a>-->
+            <!--<p class="show_money"><strong></strong></p>-->
+            <!--<span>￥</span>-->
+        <!--</div>-->
+        <!--<div class="Numbers">-->
+            <!--<div class="every_Num 1">-->
+                <!--<span class="num_value">1</span>-->
+                <!--<span class="num_value">2</span>-->
+                <!--<span class="num_value">3</span>-->
+                <!--<span class="num_value">←</span>-->
+            <!--</div>-->
+            <!--<div class="every_Num 2">-->
+                <!--<span class="num_value">4</span>-->
+                <!--<span class="num_value">5</span>-->
+                <!--<span class="num_value">6</span>-->
+                <!--<span class="num_value">+</span>-->
+            <!--</div>-->
+            <!--<div class="every_Num 3">-->
+                <!--<span class="num_value">7</span>-->
+                <!--<span class="num_value">8</span>-->
+                <!--<span class="num_value">9</span>-->
+                <!--<span class="num_value">-</span>-->
+            <!--</div>-->
+            <!--<div class="every_Num 4">-->
+                <!--<span class="num_value">C</span>-->
+                <!--<span class="num_value">0</span>-->
+                <!--<span class="num_value">.</span>-->
+                <!--<span class="num_value">=</span>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+</div>
+</body>
+</html>
